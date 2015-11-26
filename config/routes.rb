@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   match '/setup/confirm', :to => 'setup#confirm', :format => false
 
   # CategoriesController (imitate inflected_resource)
-  resources :categories #, :except => [:show, :update, :destroy, :edit]
+  resources :categories, :except => [:show, :update, :destroy, :edit]
   resources :categories, :path => 'category', :only => [:show, :edit, :update, :new, :destroy]
   match '/category/:id/page/:page', :to => 'categories#show', :format => false
 
@@ -106,7 +106,7 @@ Rails.application.routes.draw do
   end
 
   # Admin/XController
-  %w{advanced cache categories comments content profiles feedback general pages
+  %w{advanced cache category comments content profiles feedback general pages
      resources sidebar textfilters themes trackbacks users settings tags redirects seo post_types }.each do |i|
     match "/admin/#{i}", :to => "admin/#{i}#index", :format => false
     match "/admin/#{i}(/:action(/:id))", :to => "admin/#{i}", :action => nil, :id => nil, :format => false
