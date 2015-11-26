@@ -75,7 +75,7 @@ Rails.application.routes.draw do
 
   # CategoriesController (imitate inflected_resource)
   resources :categories #, :except => [:show, :update, :destroy, :edit]
-  resources :categories, :path => 'category', :only => [:show, :edit, :update, :destroy]
+  resources :categories, :path => 'category', :only => [:show, :edit, :update, :new, :destroy]
   match '/category/:id/page/:page', :to => 'categories#show', :format => false
 
   # TagsController (imitate inflected_resource)
