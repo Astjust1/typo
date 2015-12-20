@@ -81,16 +81,17 @@ class Article < Content
   end
   
   def merge_with(id)
-    article = Article.find(id)
-    if self.id != article.id.to_i
-      self.body = self.body + " " + article.body
-      article.comments.each do |c|
+    new = Article.find(id)
+    if self.id != new.id.to_i
+      self.body = self.body + " " + new.body
+      new.comments.each do |c|
         c.article_id = self.id
         c.article = self
         c.save
       end
-      article.destroy
+      new.destroy
     end
+    self.save
   end
   attr_accessor :draft, :keywords
 
