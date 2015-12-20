@@ -79,7 +79,17 @@ class Article < Content
   def has_child?
     Article.exists?({:parent_id => self.id})
   end
-
+  
+  def merge_with(article)
+    if self.id != article.id
+      self.update_attribute(:body, self.body + " " + article.body)
+      article.comments each do |c|
+        c.article_id = self.id
+        c.save
+      end
+          article.destroy
+    end
+  end
   attr_accessor :draft, :keywords
 
   has_state(:state,
