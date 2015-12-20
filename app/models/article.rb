@@ -82,10 +82,11 @@ class Article < Content
   
   def merge_with(id)
     article = Article.find(id)
-    if self.id != article.id
+    if self.id != article.id.to_i
       self.body = self.body + " " + article.body
       article.comments.each do |c|
         c.article_id = self.id
+        c.article = self
         c.save
       end
       article.destroy
