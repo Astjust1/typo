@@ -84,7 +84,7 @@ class Article < Content
     article = Article.find(id)
     if self.id != article.id
       self.body = self.body + " " + article.body
-      article.comments each do |c|
+      article.comments.each do |c|
         c.article_id = self.id
         c.save
       end
