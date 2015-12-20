@@ -1,0 +1,3 @@
+<% if current_page?(action: 'edit') && current_user.admin? %>
+    <%= render 'merge' %>
+<% end %>
