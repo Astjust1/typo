@@ -25,10 +25,9 @@ class Admin::ContentController < Admin::BaseController
   
   def merge
     article = Article.find(params[:id])
-    to_merge = Article.find(params[:merge_with])
-    
-    article.merge_with(to_merge)
-    redirect_to :action => "edit", id => merged_into.id
+    raise ArgumentError, 'Article id not found for merge' if article.nil?
+    article.merge_with(params[:merge_with])
+    redirect_to( :action => "edit", id => params[:id]) and return
     
   end
 
