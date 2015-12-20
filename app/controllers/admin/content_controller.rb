@@ -31,7 +31,7 @@ class Admin::ContentController < Admin::BaseController
     rescue ActiveRecord::RecordNotFound, ArgumentError => e
       flash[:error] = _(e.message)
     end
-    redirect_to( :action => "edit", id => params[:id]) and return
+    redirect_to(:action => 'edit', :id => params[:id]) 
     
   end
 
