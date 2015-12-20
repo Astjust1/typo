@@ -84,7 +84,8 @@ class Article < Content
     new = Article.find(id)
     if self.id != new.id.to_i
       self.body = self.body + " " + new.body
-      new.comments.each do |c|
+      other_coms = Comment.where(:article_id => id)
+      other_coms.each do |c|
         c.article_id = self.id
         c.article = self
         c.save
